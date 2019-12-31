@@ -41,7 +41,8 @@ const ImageList = ({
           {
             params: { query: searchInput },
             headers: {
-              Authorization: `Client-ID ${process.env.REACT_APP_UNSPLASH_API}`,
+              Authorization:
+                'Client-ID a2ee7b87e675b3fe46fe4e74a986a95d3be01046ef71fdc892a258ac706b050d',
             },
           },
         );
