@@ -36,16 +36,10 @@ const ImageList = ({
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(
-          'https://api.unsplash.com/search/photos',
-          {
-            params: { query: searchInput },
-            headers: {
-              Authorization:
-                'Client-ID a2ee7b87e675b3fe46fe4e74a986a95d3be01046ef71fdc892a258ac706b050d',
-            },
-          },
-        );
+        const response = await axios.post('/api', {
+          searchInput,
+        });
+
         setImagesList(response.data.results);
         setImagesListStatus(true);
       } catch {
