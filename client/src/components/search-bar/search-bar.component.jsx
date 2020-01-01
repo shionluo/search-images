@@ -1,9 +1,9 @@
 // Import
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
+import axios from 'axios';
 
 // Import - Actions
-import { setSearchInput } from 'redux/search/search.actions';
 import {
   showImagesList,
   setImagesList,
@@ -15,24 +15,31 @@ import { SearchBarContainer } from './search-bar.styles';
 
 // ----------------------------------------------------------------------------------------- //
 
-const SearchBar = ({
-  setSearchInput,
-  showImagesList,
-  setImagesList,
-  setImagesListStatus,
-}) => {
-  const [input, setInput] = useState('');
+const SearchBar = ({ showImagesList, setImagesList, setImagesListStatus }) => {
+  const [searchInput, setSearchInput] = useState('');
 
-  const onInputChange = e => setInput(e.target.value);
+  const onInputChange = e => setSearchInput(e.target.value);
 
-  const onSubmit = e => {
+  const onSubmit = async e => {
     e.preventDefault();
 
     setImagesList([]);
     setImagesListStatus(false);
-    setSearchInput(input);
     showImagesList();
-    setInput('');
+
+    try {
+      const response = await axios.post('/api', {
+        searchInput,
+      });
+
+      setImagesList(response.data.results);
+      setImagesListStatus(true);
+    } catch {
+      // eslint-disable-next-line no-console
+      console.log('Error when fetching data !');
+    }
+
+    setSearchInput('');
   };
 
   return (
@@ -44,7 +51,7 @@ const SearchBar = ({
             type="text"
             id="search"
             placeholder="..."
-            value={input}
+            value={searchInput}
             onChange={onInputChange}
           />
         </label>
@@ -54,7 +61,6 @@ const SearchBar = ({
 };
 
 const mapDispatchToProps = dispatch => ({
-  setSearchInput: item => dispatch(setSearchInput(item)),
   showImagesList: () => dispatch(showImagesList()),
   setImagesList: images => dispatch(setImagesList(images)),
   setImagesListStatus: status => dispatch(setImagesListStatus(status)),
