@@ -60,10 +60,8 @@ const SearchBar = ({ showImagesList, setImagesList, setImagesListStatus }) => {
   );
 };
 
-const mapDispatchToProps = dispatch => ({
-  showImagesList: () => dispatch(showImagesList()),
-  setImagesList: images => dispatch(setImagesList(images)),
-  setImagesListStatus: status => dispatch(setImagesListStatus(status)),
-});
-
-export default connect(null, mapDispatchToProps)(SearchBar);
+export default connect(null, {
+  showImagesList,
+  setImagesList,
+  setImagesListStatus,
+})(SearchBar);
