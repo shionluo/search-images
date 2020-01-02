@@ -1,14 +1,14 @@
 // Import
 const express = require('express');
-const dotenv = require('dotenv');
 const cors = require('cors');
 const path = require('path');
 const compression = require('compression');
-const axios = require('axios');
+const unsplash = require('./api/unsplash.api');
 // const enforce = require('express-sslify');
 
+// ----------------------------------------------------------------------------------------- //
+
 // Setup
-if (process.env.NODE_ENV !== 'production') dotenv.config();
 const app = express();
 
 // Middlewares
@@ -23,11 +23,8 @@ app.post('/api', async (req, res) => {
   const { searchInput } = req.body;
 
   try {
-    const response = await axios.get('https://api.unsplash.com/search/photos', {
+    const response = await unsplash.get('/search/photos', {
       params: { query: searchInput },
-      headers: {
-        Authorization: `Client-ID ${process.env.UNSPLASH_API}`,
-      },
     });
 
     res.status(200).send(response.data);
