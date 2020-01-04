@@ -1,24 +1,24 @@
 // Import
+import axios from 'axios';
+
+// Import - Types
 import ImagesTypes from './images.types';
 
 // ----------------------------------------------------------------------------------------- //
 
 const {
-  SHOW_IMAGES_LIST,
-  SET_IMAGES_LIST,
-  SET_IMAGES_LIST_STATUS,
+  FETCH_IMAGES_START,
+  FETCH_IMAGES_SUCCESS,
+  FETCH_IMAGES_FAILURE,
 } = ImagesTypes;
 
-export const showImagesList = () => ({
-  type: SHOW_IMAGES_LIST,
-});
+export const fetchImages = searchInput => async dispatch => {
+  dispatch({ type: FETCH_IMAGES_START });
 
-export const setImagesList = items => ({
-  type: SET_IMAGES_LIST,
-  payload: items,
-});
-
-export const setImagesListStatus = status => ({
-  type: SET_IMAGES_LIST_STATUS,
-  payload: status,
-});
+  try {
+    const response = await axios.post('/api', { searchInput });
+    dispatch({ type: FETCH_IMAGES_SUCCESS, payload: response.data.results });
+  } catch (error) {
+    dispatch({ type: FETCH_IMAGES_FAILURE, payload: error.message });
+  }
+};

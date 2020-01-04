@@ -4,30 +4,36 @@ import ImagesTypes from './images.types';
 // ----------------------------------------------------------------------------------------- //
 
 const {
-  SHOW_IMAGES_LIST,
-  SET_IMAGES_LIST,
-  SET_IMAGES_LIST_STATUS,
+  FETCH_IMAGES_START,
+  FETCH_IMAGES_SUCCESS,
+  FETCH_IMAGES_FAILURE,
 } = ImagesTypes;
 
 const initialState = {
   toggle: 'off',
-  imagesList: [],
   status: false,
+  imagesList: [],
+  error: '',
 };
 
 const imagesReducer = (state = initialState, { type, payload }) => {
   const reducer = {
-    [SHOW_IMAGES_LIST]: {
+    [FETCH_IMAGES_START]: {
       ...state,
       toggle: 'on',
+      status: false,
+      imagesList: [],
+      error: '',
     },
-    [SET_IMAGES_LIST]: {
+    [FETCH_IMAGES_SUCCESS]: {
       ...state,
+      status: true,
       imagesList: payload,
     },
-    [SET_IMAGES_LIST_STATUS]: {
+    [FETCH_IMAGES_FAILURE]: {
       ...state,
-      status: payload,
+      status: true,
+      error: payload,
     },
   };
 
