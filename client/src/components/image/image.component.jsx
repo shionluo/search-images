@@ -13,7 +13,7 @@ const Image = ({ imageDetail: { urls, description } }) => {
   useEffect(() => {
     const setSpans = () => {
       const { height } = imageRef.current;
-      const spans = Math.ceil(height / 10) + 1;
+      const spans = Math.ceil(height / 1) + 9;
 
       setImageSpans(spans);
     };

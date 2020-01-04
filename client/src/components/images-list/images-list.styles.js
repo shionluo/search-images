@@ -8,7 +8,7 @@ export const ImagesListContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   grid-gap: 0 10px;
-  grid-auto-rows: 10px;
+  grid-auto-rows: 1px;
 
   img {
     width: 100%;
