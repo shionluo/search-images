@@ -1,5 +1,5 @@
 // Import
-import React, { createRef, useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 // Import - Styles
 import { ImageContainer } from './image.styles';
@@ -7,7 +7,7 @@ import { ImageContainer } from './image.styles';
 // ----------------------------------------------------------------------------------------- //
 
 const Image = ({ imageDetail: { urls, description } }) => {
-  const imageRef = createRef();
+  const imageRef = useRef();
   const [imageSpans, setImageSpans] = useState(0);
 
   useEffect(() => {

@@ -9,14 +9,14 @@ const {
   FETCH_IMAGES_FAILURE,
 } = ImagesTypes;
 
-const initialState = {
+const INITIAL_STATE = {
   toggle: 'off',
   status: false,
   imagesList: [],
   error: '',
 };
 
-const imagesReducer = (state = initialState, { type, payload }) => {
+const imagesReducer = (state = INITIAL_STATE, { type, payload }) => {
   const reducer = {
     [FETCH_IMAGES_START]: {
       ...state,

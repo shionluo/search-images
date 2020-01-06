@@ -1,5 +1,5 @@
 // Import
-import React, { Suspense, lazy } from 'react';
+import React, { StrictMode, Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 // Import - Components
@@ -17,22 +17,24 @@ const Error = lazy(() => import('components/error/error.component'));
 
 const App = () => (
   <>
-    {/* Global Styles */}
-    <GlobalStyle />
+    <StrictMode>
+      {/* Global Styles */}
+      <GlobalStyle />
 
-    {/* Router */}
-    <Router>
-      <ErrorBoundary>
-        <Suspense fallback={<Spinner />}>
-          <Switch>
-            <Route exact path="/" component={Home} />
+      {/* Router */}
+      <Router>
+        <ErrorBoundary>
+          <Suspense fallback={<Spinner />}>
+            <Switch>
+              <Route exact path="/" component={Home} />
 
-            {/* No match Page */}
-            <Route path="*" component={Error} />
-          </Switch>
-        </Suspense>
-      </ErrorBoundary>
-    </Router>
+              {/* No match Page */}
+              <Route path="*" component={Error} />
+            </Switch>
+          </Suspense>
+        </ErrorBoundary>
+      </Router>
+    </StrictMode>
   </>
 );
 

@@ -3,6 +3,7 @@ import { combineReducers } from 'redux';
 
 // Import - Reducer
 import imagesReducer from './images/images.reducer';
+import searchReducer from './search/search.reducer';
 
 // Reducers
 
@@ -10,6 +11,7 @@ import imagesReducer from './images/images.reducer';
 
 const rootReducer = combineReducers({
   images: imagesReducer,
+  search: searchReducer,
 });
 
 export default rootReducer;
