@@ -33,6 +33,7 @@ const SearchBar = ({ searchInput, onSearchChange, fetchImages }) => {
             id="search"
             placeholder="..."
             value={searchInput}
+            autoComplete="off"
             onChange={e => onSearchChange(e.target.value)}
           />
         </label>
