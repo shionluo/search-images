@@ -1,7 +1,4 @@
 // Import
-import axios from 'axios';
-
-// Import - Types
 import ImagesTypes from './images.types';
 
 // ----------------------------------------------------------------------------------------- //
@@ -12,13 +9,17 @@ const {
   FETCH_IMAGES_FAILURE,
 } = ImagesTypes;
 
-export const fetchImages = searchInput => async dispatch => {
-  dispatch({ type: FETCH_IMAGES_START });
+export const fetchImagesStart = searchInput => ({
+  type: FETCH_IMAGES_START,
+  payload: searchInput,
+});
 
-  try {
-    const response = await axios.post('/api', { searchInput });
-    dispatch({ type: FETCH_IMAGES_SUCCESS, payload: response.data.results });
-  } catch (error) {
-    dispatch({ type: FETCH_IMAGES_FAILURE, payload: error.message });
-  }
-};
+export const fetchImagesSuccess = response => ({
+  type: FETCH_IMAGES_SUCCESS,
+  payload: response.data.results,
+});
+
+export const fetchImagesFailure = error => ({
+  type: FETCH_IMAGES_FAILURE,
+  payload: error.message,
+});

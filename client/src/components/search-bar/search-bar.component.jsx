@@ -7,7 +7,7 @@ import { createStructuredSelector } from 'reselect';
 import { selectSearchInput } from 'redux/search/search.selectors';
 
 // Import - Actions
-import { fetchImages } from 'redux/images/images.actions';
+import { fetchImagesStart } from 'redux/images/images.actions';
 import { onSearchChange } from 'redux/search/search.actions';
 
 // Import - Styles
@@ -15,11 +15,11 @@ import { SearchBarContainer } from './search-bar.styles';
 
 // ----------------------------------------------------------------------------------------- //
 
-const SearchBar = ({ searchInput, onSearchChange, fetchImages }) => {
+const SearchBar = ({ searchInput, onSearchChange, fetchImagesStart }) => {
   const onSubmit = async e => {
     e.preventDefault();
 
-    fetchImages(searchInput);
+    fetchImagesStart(searchInput);
     onSearchChange('');
   };
 
@@ -46,6 +46,6 @@ const mapStateToProps = createStructuredSelector({
   searchInput: selectSearchInput,
 });
 
-export default connect(mapStateToProps, { onSearchChange, fetchImages })(
+export default connect(mapStateToProps, { onSearchChange, fetchImagesStart })(
   SearchBar,
 );
